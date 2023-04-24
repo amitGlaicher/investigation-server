@@ -5,7 +5,6 @@ const { sendError } = require('../errController');
 
 testRouter.post('/addtest', async (req, res) => {
   try {
-    console.log(req.body);
     const newTest = await testService.createTest(req.body);
     res.status(200).send('succeed');
   } catch (err) {

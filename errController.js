@@ -15,7 +15,6 @@ const errMessage = Object.freeze({
 const checkData = (data, parameters) => {
   parameters.forEach((parameter) => {
     if (!data[parameter]) throw errMessage.MISSING_DATA;
-    console.log(parameter);
   });
 };
 

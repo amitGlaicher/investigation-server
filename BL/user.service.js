@@ -61,7 +61,7 @@ const deleteUser = async (email) => {
 const addTestToUser = async (email, data) => {
   const user = await getUser(email);
   const test = await createTest(data);
-  userController.update({ _id: user._id }, { test: { $push: test._id } });
+  userController.update({ _id: user._id }, { $push: { test: test._id } });
   return test;
 };
 

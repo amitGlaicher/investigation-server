@@ -25,6 +25,7 @@ const createTest = async (data) => {
     date: data.date,
     chapters: idsArray,
     numChapters: data.numChapters,
+    simulationName:data.simulationName
   };
   const newTest = await testController.create(test);
   return newTest._id;

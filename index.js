@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 
@@ -34,5 +34,5 @@ app.use(cors());
 app.use('/api', mainRouter);
 
 app.listen(PORT, () => {
-  console.log('server listen to ' + PORT);
+  ('server listen to ' + PORT);
 });

@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 
 const testSchema = new mongoose.Schema({
-  simulatonName: {
+  simulationName: {
     type: String,
     required: true,
   },
   createDate: {
     type: Date,
   },
-  numChpters: {
+  numChapters: {
     type: Number,
     required: true,
   },
