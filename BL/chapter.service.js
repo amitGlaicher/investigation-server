@@ -13,6 +13,7 @@ const getInsights = async (id) => {
 const createChapter = async (chapter) => {
   checkData(chapter, ['title', 'correct', 'incorrect']);
   const newChapter = await chapterController.create(chapter);
+  
   return newChapter._id;
 };
 

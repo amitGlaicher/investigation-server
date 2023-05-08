@@ -13,6 +13,9 @@ const testSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  correctAnswer: {type: Number,},
+  sumAnswers: {type: Number,},
+  insights:[{type: String,}],
   chapters: [{ type: mongoose.Schema.Types.ObjectId, ref: 'chapter' }],
 });
 

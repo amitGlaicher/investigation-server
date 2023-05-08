@@ -28,9 +28,9 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  vocabulary: {
+  vocabulary: [{
     type: String,
-  },
+  }],
   permission: {
     type: String,
     enum: ['admin', 'editor', 'viewer'],

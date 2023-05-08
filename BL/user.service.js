@@ -6,7 +6,7 @@ const testService = require('./test.service');
 const { errMessage, checkData } = require('../errController');
 const { createTest } = require('./test.service');
 // const fs = require('fs');
-const SALTROUNDS = Number(process.env.SALTROUNDS);
+const SALTROUNDS = 10;
 
 const getUser = async (email, proj = undefined, populate) => {
   const user = await userController.readOne({ email }, proj, populate);
@@ -26,6 +26,7 @@ const login = async (data) => {
   const isEqual = bcrypt.compareSync(data.password, user.password);
   if (!isEqual) throw errMessage.PASSWORDS_ARE_NOT_CORRECT;
   const token = createToken(user.email);
+  console.log(token);
   return token;
 };
 
@@ -61,7 +62,13 @@ const deleteUser = async (email) => {
 const addTestToUser = async (email, data) => {
   const user = await getUser(email);
   const test = await createTest(data);
-  userController.update({ _id: user._id }, { $push: { test: test._id } });
+  const newWord = []
+  data.data.filter(chapter=>chapter.title==="אנגלית").forEach(chapter=>{
+    newWord.push(...chapter.correct.map(ans=>ans["מילה חדשה"].toLowerCase()))
+    newWord.push(...chapter.incorrect.map(ans=>ans["מילה חדשה"].toLowerCase()))
+  })
+  const vocabulary = [...newWord.filter(word=>!user.vocabulary.includes(word))];
+  userController.update({ _id: user._id }, { vocabulary: [...user.vocabulary,...vocabulary],$push: { test: test._id} });
   return test;
 };
 
