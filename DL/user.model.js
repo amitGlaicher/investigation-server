@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     enum: ['male', 'female'],
     type: String,
   },
-  test: [{ type: mongoose.Schema.Types.ObjectId, ref: 'test', select: false }],
+  test: [{ type: mongoose.Schema.Types.ObjectId, ref: 'test'}],
   createDate: {
     type: Date,
     default: Date.now,

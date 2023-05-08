@@ -152,7 +152,7 @@ userRouter.put('/addtest', validToken, async (req, res) => {
   try {
     console.log(req.body);
     const test = await userService.addTestToUser(req.email, req.body);
-    res.status(200).send('success');
+    res.status(200).send(test);
   } catch (err) {
     sendError(res, err);
   }

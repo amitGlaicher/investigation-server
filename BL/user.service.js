@@ -68,8 +68,8 @@ const addTestToUser = async (email, data) => {
     newWord.push(...chapter.incorrect.map(ans=>ans["מילה חדשה"].toLowerCase()))
   })
   const vocabulary = [...newWord.filter(word=>!user.vocabulary.includes(word))];
-  userController.update({ _id: user._id }, { vocabulary: [...user.vocabulary,...vocabulary],$push: { test: test._id} });
-  return test;
+  const res = userController.update({ _id: user._id }, { vocabulary: [...user.vocabulary,...vocabulary],$push: { test: test._id} });
+  return res;
 };
 
 module.exports = {

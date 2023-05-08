@@ -15,7 +15,7 @@ const testSchema = new mongoose.Schema({
   },
   correctAnswer: {type: Number,},
   sumAnswers: {type: Number,},
-  insights:[{type: String,}],
+  insights:[],
   chapters: [{ type: mongoose.Schema.Types.ObjectId, ref: 'chapter' }],
 });
 
