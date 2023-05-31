@@ -3,12 +3,12 @@ const testData = require('./test.model');
 async function create(data) {
   return await testData.create(data);
 }
-async function read(filter, proj) {
-  return await testData.find(filter, proj);
+async function read(filter, proj, populate) {
+  return await testData.find(filter, proj).populate(populate);
 }
 
-async function readOne(filter, proj) {
-  let res = await testData.find(filter, proj);
+async function readOne(filter, proj, populate) {
+  let res = await testData.find(filter, proj).populate(populate);
   return res[0];
 }
 

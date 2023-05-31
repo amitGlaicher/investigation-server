@@ -12,4 +12,21 @@ testRouter.post('/addtest', async (req, res) => {
   }
 });
 
+
+//פונקציה חדשה שמביאה את המבחנים
+
+
+testRouter.get('/getTest', async (req, res) => {
+  try {
+    console.log(req.body.test)
+    const test = await testService.getTestOfUser(req.body.test);
+    console.log(test);
+    res.status(200).send(test);
+  } catch (err) {
+    sendError(res, err);
+  }
+});
+
+
+
 module.exports = { testRouter };

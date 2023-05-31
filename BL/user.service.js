@@ -62,12 +62,19 @@ const deleteUser = async (email) => {
 const addTestToUser = async (email, data) => {
   const user = await getUser(email);
   const test = await createTest(data);
-  const newWord = []
-  data.data.filter(chapter=>chapter.title==="אנגלית").forEach(chapter=>{
-    newWord.push(...chapter.correct.map(ans=>ans["מילה חדשה"].toLowerCase()))
-    newWord.push(...chapter.incorrect.map(ans=>ans["מילה חדשה"].toLowerCase()))
-  })
-  const vocabulary = [...newWord.filter(word=>!user.vocabulary.includes(word))];
+  
+const newWordSet = new Set();
+data.data
+  .filter(chapter => chapter.title === "אנגלית")
+  .forEach(chapter => {
+    chapter.correct.forEach(ans => newWordSet.add(ans["מילה חדשה"].toLowerCase()));
+    chapter.incorrect.forEach(ans => newWordSet.add(ans["מילה חדשה"].toLowerCase()));
+  });
+
+const newWord = Array.from(newWordSet);
+const vocabulary = newWord.filter(word => !user.vocabulary.includes(word));
+
+
   const res = userController.update({ _id: user._id }, { vocabulary: [...user.vocabulary,...vocabulary],$push: { test: test._id} });
   return res;
 };

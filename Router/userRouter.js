@@ -139,6 +139,18 @@ userRouter.get('/', validToken, async (req, res) => {
   }
 });
 
+//.לבדוק את מה שקורה פה!!!
+userRouter.get('/getCTestChapters', validToken, async (req, res) => {
+  try {
+    const test = await userService.getUserTests(req.email); //לבדוק!!
+    console.log(test);
+    res.status(200).send(test);
+  } catch (err) {
+    sendError(res, err);
+  }
+});
+
+
 userRouter.get('/insights', validToken, async (req, res) => {
   try {
     const insights = await userService.getInsights(req.email);

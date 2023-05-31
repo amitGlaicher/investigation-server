@@ -7,7 +7,9 @@ const testSchema = new mongoose.Schema({
     required: true,
   },
   createDate: {
-    type: Date,
+    // type: Date,
+    type: String,
+
   },
   numChapters: {
     type: Number,

@@ -2,10 +2,28 @@ const testController = require("../DL/test.controller");
 const chapterService = require("./chapter.service");
 const { checkData } = require("../errController");
 
-const getTest = async (filter) => {
-  const test = await testController.readOne({ filter });
+// const getTest = async (filter) => {
+//   const test = await testController.readOne({ filter });
+//   return test;
+// };
+
+
+//אני הוספתי
+const getTest = async (filter,proj = undefined, populate) => {
+  const test = await testController.readOne({ filter },proj, populate);
   return test;
 };
+
+
+//אני הוספתי כרגע הפונקציה לא עובדת
+const getTestOfUser = async (data) => {
+  console.log(data);
+  const test =await getTest(data, `+chapter`,`chapter`)
+  console.log(test);
+  return test;
+}
+
+
 const getInsights = async (filter) => {
   const test = await testController.readOne({ filter });
   const insights = test.map((chapter) => {
@@ -13,6 +31,9 @@ const getInsights = async (filter) => {
   });
   return insights;
 };
+
+
+
 
 const createTest = async (data) => {
   checkData(data, ["simulationName", "numChapters", "data"]);
@@ -34,7 +55,7 @@ const createTest = async (data) => {
         break;
     }
     idsArray.push(await chapterService.createChapter(data.data[chapter]));
-    incorrect += data.data[chapter].correct.length;
+    incorrect += data.data[chapter].incorrect.length;
     answers += data.data[chapter].correct.length;
     answers += data.data[chapter].incorrect.length;
     insights[insightsCounter].push(
@@ -58,7 +79,7 @@ const createTest = async (data) => {
   }
   const test = {
     name: data.name,
-    date: data.date,
+    createDate: data.date,
     chapters: idsArray,
     numChapters: data.numChapters,
     simulationName: data.simulationName,
@@ -70,4 +91,4 @@ const createTest = async (data) => {
   return newTest._id;
 };
 
-module.exports = { getTest, createTest, getInsights };
+module.exports = { getTest, createTest, getInsights, getTestOfUser };
