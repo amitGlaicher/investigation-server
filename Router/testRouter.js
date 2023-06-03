@@ -18,8 +18,7 @@ testRouter.post('/addtest', async (req, res) => {
 
 testRouter.get('/getTest', async (req, res) => {
   try {
-    console.log(req.body.test)
-    const test = await testService.getTestOfUser(req.body.test);
+    const test = await testService.getTestOfUser(req.query.test);
     console.log(test);
     res.status(200).send(test);
   } catch (err) {

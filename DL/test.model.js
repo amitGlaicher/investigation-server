@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('./chapter.model')
 
 const testSchema = new mongoose.Schema({
   simulationName: {

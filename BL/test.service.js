@@ -10,15 +10,14 @@ const { checkData } = require("../errController");
 
 //אני הוספתי
 const getTest = async (filter,proj = undefined, populate) => {
-  const test = await testController.readOne({ filter },proj, populate);
+  const test = await testController.readOne(filter,proj, populate);
   return test;
 };
 
 
 //אני הוספתי כרגע הפונקציה לא עובדת
 const getTestOfUser = async (data) => {
-  console.log(data);
-  const test =await getTest(data, `+chapter`,`chapter`)
+  const test =await getTest({_id:data}, `+chapters`,`chapters`)
   console.log(test);
   return test;
 }
